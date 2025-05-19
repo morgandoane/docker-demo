@@ -136,36 +136,50 @@ The included `Dockerfile` builds and packages the app:
 
 ## Deploy to Google Cloud Run
 
-We recommend setting up continuous deployment via the Google Cloud Console UI:
+Follow these steps to deploy your application using the current Google Cloud Run UI:
 
-1. Push your code to GitHub (e.g., the `main` branch).
-2. In the Google Cloud Console, go to **Cloud Run** and click **Create Service**.
-3. Under **Source**, choose **Continuously deploy from source repository**, then click **Connect Repository**.
+1. In the Google Cloud Console, navigate to **Cloud Run** and click **Create Service**.
 
-   - Select **GitHub** and authorize access if prompted.
-   - Choose the `docker-demo` repository and the branch you wish to deploy (e.g., `main`).
+2. Select **Continuously deploy from a repository (source or function)**:
 
-4. Configure build settings:
+   - Click on the GitHub option and authorize access if prompted
+   - Select your `docker-demo` repository and the branch you wish to deploy (e.g., `main`)
 
-   - **Region**: e.g., `us-central1`.
-   - **Container registry**: Container Registry or Artifact Registry.
-   - **Build configuration**: Select **Dockerfile** (path: `/Dockerfile`).
-   - **Port**: `8080`.
+3. Under **Configure**:
+   - Enter a unique **Service name** (cannot be changed later)
+   - Select your preferred **Region** (e.g., `europe-west1`)
+   - Note the **Endpoint URL** that will be generated for your service
+4. For **Authentication**, select **Allow unauthenticated invocations** as our application will handle authentication on its own.
 
-5. Click **Create**. Cloud Build will automatically build and push your container, and Cloud Run will deploy it.
-6. On every new commit to the selected branch, Cloud Build and Cloud Run will rebuild and redeploy your service.
+5. You can set environment variables directly in the UI under the **Container, Variables & Secrets, Connections, Security** section:
 
-You can monitor builds and deployments under **Cloud Build** and view service logs, traffic, and environment variables in the **Cloud Run** console.
+   - Click to expand this section
+   - Add environment variables as key-value pairs (e.g., `PORT=8080`)
+   - You can add as many variables as needed for your application configuration
+
+6. Click **Create** to deploy your service.
+
+Cloud Build will automatically build and deploy your container based on the Dockerfile in your repository. On every new commit to the selected branch, Cloud Build and Cloud Run will rebuild and redeploy your service.
+
+You can monitor builds and deployments under **Cloud Build** and view service logs, traffic patterns, and environment variables in the **Cloud Run** console.
 
 ## Environment Variables
 
 - `PORT` (optional): Port for the server (default: `8080` in Cloud Run)
 
-Set additional vars via:
+You can set environment variables in two ways:
 
-```bash
-gcloud run services update docker-demo --update-env-vars KEY=VALUE
-```
+1. Through the Cloud Run UI:
+
+   - Navigate to your service in the Cloud Run console
+   - Select the "Edit & Deploy New Revision" option
+   - Expand the "Container, Variables & Secrets, Connections, Security" section
+   - Add or modify environment variables as needed
+
+2. Via gcloud CLI:
+   ```bash
+   gcloud run services update docker-demo --update-env-vars KEY=VALUE
+   ```
 
 ## License
 
