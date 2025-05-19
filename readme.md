@@ -323,7 +323,7 @@ Cloud Build will automatically detect your Dockerfile and use it to build your c
 
 3. Under **Configure**:
    - Enter a unique **Service name** (cannot be changed later)
-   - Select your preferred **Region** (e.g., `europe-west1`)
+   - Select your preferred **Region** (e.g., `us-west3` for Salt Lake City)
    - Note the **Endpoint URL** that will be generated for your service
 4. For **Authentication**, select **Allow unauthenticated invocations** as our application will handle authentication on its own.
 
