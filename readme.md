@@ -1,8 +1,6 @@
-Cloud Build will automatically build and deploy your container based on the Dockerfile in your repository. On every new commit to the selected branch, Cloud Build and Cloud Run will rebuild and redeploy your service.
+# docker-demo
 
-You can monitor builds and deployments under **Cloud Build** and view service logs, traffic patterns, and environment variables in the **Cloud Run** console.# docker-demo
-
-A minimal TypeScript‑based Express server, Dockerized and ready for deployment on Google Cloud Run.
+A minimal TypeScript‑based Express server, Dockerized and ready for deployment on Google Cloud Run. This package is distributed as a zip file for easy setup on your own GitHub account and deployment to Cloud Run.
 
 ## Prerequisites
 
@@ -13,10 +11,10 @@ A minimal TypeScript‑based Express server, Dockerized and ready for deployment
 
 ## Installation
 
-1. Clone the repository:
+1. Unzip the provided `docker-demo.zip` file:
 
    ```bash
-   git clone https://github.com/morgandoane/docker-demo.git
+   unzip docker-demo.zip
    cd docker-demo
    ```
 
@@ -25,6 +23,29 @@ A minimal TypeScript‑based Express server, Dockerized and ready for deployment
    ```bash
    npm install
    ```
+
+3. Set up your own GitHub repository:
+
+   ```bash
+   # Initialize git repository locally
+   git init
+
+   # Add all files
+   git add .
+
+   # Commit the files
+   git commit -m "Initial commit"
+
+   # Create a new repository on GitHub.com (do not initialize with README, license, or .gitignore)
+   # Then connect your local repository to the remote GitHub repository
+   git remote add origin https://github.com/YOUR-USERNAME/docker-demo.git
+
+   # Push the repository to GitHub
+   git branch -M main
+   git push -u origin main
+   ```
+
+   Replace `YOUR-USERNAME` with your GitHub username.
 
 ## package.json Overview
 
@@ -302,7 +323,7 @@ Cloud Build will automatically detect your Dockerfile and use it to build your c
 
 3. Under **Configure**:
    - Enter a unique **Service name** (cannot be changed later)
-   - Select your preferred **Region** (e.g., `us-west3 for Salt Lake City`)
+   - Select your preferred **Region** (e.g., `europe-west1`)
    - Note the **Endpoint URL** that will be generated for your service
 4. For **Authentication**, select **Allow unauthenticated invocations** as our application will handle authentication on its own.
 
